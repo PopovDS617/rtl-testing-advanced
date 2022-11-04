@@ -1,20 +1,20 @@
 import classes from './Card.module.css';
-import heartFilled from '../components/ui/svg/heartFilled.svg';
-import heartOutlined from '../components/ui/svg/heartOutlined.svg';
+import heartFilled from '../ui/svg/heartFilled.svg';
+import heartOutlined from '../ui/svg/heartOutlined.svg';
 import { useState } from 'react';
 
 const Card = ({ name, phone, email, image, favoured }) => {
   const [isFavored, setIsFavored] = useState(favoured);
 
-  const toggleFavoredHandler = () => {
+  const toggleFavoHandler = () => {
     setIsFavored((prev) => !prev);
   };
 
   return (
-    <div className={classes.card}>
+    <article className={classes.card}>
       <div className={classes['card-header']}>
         <img className={classes['card-img']} src={image.url} alt={image.alt} />
-        <button className={classes.heart} onClick={toggleFavoredHandler}>
+        <button className={classes.heart} onClick={toggleFavoHandler}>
           {isFavored ? (
             <img src={heartFilled} alt="filled heart" />
           ) : (
@@ -27,7 +27,7 @@ const Card = ({ name, phone, email, image, favoured }) => {
         <p>{phone}</p>
         <p>{email}</p>
       </div>
-    </div>
+    </article>
   );
 };
 export default Card;
