@@ -1,9 +1,14 @@
 import classes from './Pets.module.css';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import CardList from '../Cards/CardList';
 import Filter from '../Filter/Filter';
 import axios from 'axios';
+
+export const PetsContext = createContext({
+  cats: [],
+  setCatsList: () => {},
+});
 
 const Pets = () => {
   const [catList, setCatsList] = useState([]);
@@ -33,11 +38,6 @@ const Pets = () => {
     }
     if (filters.favoured !== 'any') {
       catsFiltered = catsFiltered.filter((cat) => {
-        console.log(
-          cat.favoured,
-          filters.favoured,
-          cat.favoured === filters.favoured
-        );
         return (
           cat.favoured === (filters.favoured === 'favoured' ? true : false)
         );
@@ -47,11 +47,11 @@ const Pets = () => {
   }, [filters]);
 
   return (
-    <div className="container">
-      <div className={classes['app-container']}>
+    <div className={classes['app-container']}>
+      <PetsContext.Provider value={{ cats: filteredCats, setCatsList }}>
         <Filter filters={filters} setFilters={setFilters} />
-        <CardList cats={filteredCats} setCatsList={setCatsList} />
-      </div>
+        <CardList />
+      </PetsContext.Provider>
     </div>
   );
 };

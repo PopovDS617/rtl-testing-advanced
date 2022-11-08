@@ -1,12 +1,10 @@
 import classes from './CardList.module.css';
 import Card from './Card';
+import { useContext } from 'react';
+import { PetsContext } from '../Pets/Pets';
 
-const CardList = ({ cats, setCatsList }) => {
-  const updateFavourite = (index, favoured) => {
-    const updatedCats = [...cats];
-    updatedCats[index].favoured = favoured;
-    setCatsList(updatedCats);
-  };
+const CardList = () => {
+  const { cats, setCatsList } = useContext(PetsContext);
 
   return (
     <div className={classes['pet-cards-container']}>
@@ -18,7 +16,6 @@ const CardList = ({ cats, setCatsList }) => {
           email={cat.email}
           image={cat.image}
           favoured={cat.favoured}
-          updateFavourite={updateFavourite}
           index={index}
         />
       ))}
