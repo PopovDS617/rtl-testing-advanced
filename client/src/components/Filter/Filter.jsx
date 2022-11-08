@@ -1,31 +1,45 @@
 import classes from './Filter.module.css';
 import React from 'react';
 
-const Filter = () => {
-  return (
-    <div className={classes['pet-filter-container']}>
-      <div className={classes['filter-container']}>
-        <label htmlFor="favourite">Favourite</label>
-        <select
-          className={classes['form-select']}
-          name="favourite"
-          id="favourite"
-        >
-          <option value="any">any</option>
-          <option value="favourite">favourite</option>
-          <option value="not favourite">not favourite</option>
-        </select>
-      </div>
-      <div className={classes['filter-container']}>
-        <label htmlFor="gender">Gender</label>
-        <select className={classes['form-select']} name="gender" id="gender">
-          <option value="any">any</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-        </select>
-      </div>
+const Filter = ({ filters, setFilters }) => (
+  <div className={classes['pet-filter-container']}>
+    <div className={classes['filter-container']}>
+      <label htmlFor="favourite">Favourite</label>
+      <select
+        name="favourite"
+        id="favourite"
+        className={classes['form-select']}
+        onChange={(e) => {
+          setFilters({
+            ...filters,
+            favoured: e.target.value,
+          });
+        }}
+      >
+        <option value="any">Any</option>
+        <option value="favoured">Favoured</option>
+        <option value="not favoured">Not Favoured</option>
+      </select>
     </div>
-  );
-};
+    <div className={classes['filter-container']}>
+      <label htmlFor="gender">Gender</label>
+      <select
+        name="gender"
+        id="gender"
+        className={classes['form-select']}
+        onChange={(e) => {
+          setFilters({
+            ...filters,
+            gender: e.target.value,
+          });
+        }}
+      >
+        <option value="any">Any</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+  </div>
+);
 
 export default Filter;
