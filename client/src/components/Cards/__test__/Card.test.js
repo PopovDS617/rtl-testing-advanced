@@ -11,6 +11,7 @@ const cardProps = {
     alt: 'cat pic',
   },
   favoured: false,
+  updateFavourite: () => {},
 };
 
 describe('Card', () => {
